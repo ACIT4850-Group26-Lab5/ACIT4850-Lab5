@@ -12,6 +12,13 @@ Team Members
 ************
 
 Emilio Wu
+Justin Chau
+
+******************
+Coding Conventions
+******************
+
+K&R
 
 *******************
 Server Requirements
