@@ -17,7 +17,14 @@ class Order extends Application {
 
     // start a new order
     function neworder() {
-        //FIXME
+        $order_num = $this->orders->highest() + 1;
+        
+        $neworder = $this->orders->create();
+        $neworder->num = $order_num;
+        $neworder->date = date();
+        $neworder->status = 'a';
+        $neworder->total = 0;
+        $this->orders->add($neworder);
 
         redirect('/order/display_menu/' . $order_num);
     }
@@ -29,8 +36,10 @@ class Order extends Application {
 
         $this->data['pagebody'] = 'show_menu';
         $this->data['order_num'] = $order_num;
-        //FIXME
-
+        
+        $this->data['title'] = "Order # ". $order_num . ' (' . number_format($this->orders->total($order_num), 2) . ')';
+        //$this->data['title'] = "Order # ". $order_num;
+        
         // Make the columns
         $this->data['meals'] = $this->make_column('m');
         $this->data['drinks'] = $this->make_column('d');
@@ -51,8 +60,10 @@ class Order extends Application {
 	$this->hokeyfix($this->data['drinks'],$order_num);
 	$this->hokeyfix($this->data['sweets'],$order_num);
 	// end of hokey patch
-	
+        
         $this->render();
+        
+        //return $this->menu->some('category', $category);
     }
 
     // inject order # into nested variable pair parameters
@@ -63,13 +74,13 @@ class Order extends Application {
     
     // make a menu ordering column
     function make_column($category) {
-        //FIXME
+        return $this->menu->some('category', $category);
         return $items;
     }
 
     // add an item to an order
     function add($order_num, $item) {
-        //FIXME
+        $this->orders->add_item($order_num, $item);
         redirect('/order/display_menu/' . $order_num);
     }
 
@@ -84,7 +95,7 @@ class Order extends Application {
     }
 
     // proceed with checkout
-    function proceed($order_num) {
+    function commit($order_num) {
         //FIXME
         redirect('/');
     }
