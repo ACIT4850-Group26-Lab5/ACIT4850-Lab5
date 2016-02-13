@@ -57,14 +57,13 @@ class Orders extends MY_Model {
     function validate($num) {
         $CI = & get_instance();
         $items = $CI->orderitems->group($num);
-        $gotem = array();
-        if(count($items) > 0)
-            foreach($items as $item){
-                $menu = $CI->menu->get[$item->item];
-                $gotem[$menu->category] = 1;
-            }
-        
-        return isset($gotem['n']) && isset($gotem['d']) && isset($gotem['s']);
+	$gotem = array();
+	if (count($items) > 0)
+	foreach ($items as $item) {
+            $menu = $CI->menu->get($item->item);
+            $gotem[$menu->category] = 1;
+        }
+        return isset($gotem['m']) && isset($gotem['d']) && isset($gotem['s']);
     }
 
 }
