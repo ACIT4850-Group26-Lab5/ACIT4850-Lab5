@@ -1,0 +1,6 @@
+Change log
+Newest at the top
+
+02/12/2016 11:50PM: Step 6-7 of tutorial
+02/11/2016 07:25PM: Step 1-5 of tutorial
+02/11/2016 10:54AM: Created changelog, changed readme
